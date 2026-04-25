@@ -540,11 +540,34 @@ function goF(n){
   }
   document.getElementById('lbl').innerHTML='<span>Paso '+n+' de 4</span> — '+fL[n];
 }
-function submitF(){
-  document.getElementById('s4').style.display='none';
-  document.getElementById('suc').style.display='block';
-  for(let i=1;i<=4;i++) document.getElementById('pb'+i).classList.add('on');
-  document.getElementById('lbl').innerHTML='<span>Formulario enviado</span>';
+async function submitF(){
+  const areas=[...document.querySelectorAll('input[name="areas"]:checked')].map(i=>i.value).join(', ');
+  const via=document.querySelector('input[name="via"]:checked')?.value||'';
+  const data={
+    'Qué te trajo hasta acá':document.getElementById('q1').value,
+    'Áreas afectadas':areas,
+    'Por qué busca ayuda ahora':document.getElementById('q3').value,
+    'Preferencia de contacto':via,
+    'Nombre':document.getElementById('nombre').value,
+    'Contacto':document.getElementById('contacto-dato').value
+  };
+  try{
+    const res=await fetch('https://formspree.io/f/mwvazvqy',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(data)
+    });
+    if(res.ok){
+      document.getElementById('s4').style.display='none';
+      document.getElementById('suc').style.display='block';
+      for(let i=1;i<=4;i++) document.getElementById('pb'+i).classList.add('on');
+      document.getElementById('lbl').innerHTML='<span>Formulario enviado</span>';
+    } else {
+      alert('Hubo un error al enviar. Por favor escribime directamente por WhatsApp.');
+    }
+  } catch(e){
+    alert('Hubo un error al enviar. Por favor escribime directamente por WhatsApp.');
+  }
 }
 document.querySelectorAll('.opt').forEach(el=>{
   el.addEventListener('click',function(){
