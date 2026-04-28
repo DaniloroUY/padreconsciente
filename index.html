@@ -545,8 +545,8 @@ async function submitF(){
   const areas=[...document.querySelectorAll('input[name="areas"]:checked')].map(i=>i.value).join(', ');
   const q3=document.getElementById('q3').value;
   const via=document.querySelector('input[name="via"]:checked')?.value||'No especificado';
-  const nombre=document.getElementById('nombre').value;
-  const contactoDato=document.getElementById('contacto-dato').value;
+  const nombre=document.getElementById('fnombre').value;
+  const contactoDato=document.getElementById('fcontacto').value;
   if(!nombre||!contactoDato){
     alert('Por favor completá tu nombre y dato de contacto antes de enviar.');
     return;
