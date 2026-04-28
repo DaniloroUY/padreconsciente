@@ -541,21 +541,31 @@ function goF(n){
   document.getElementById('lbl').innerHTML='<span>Paso '+n+' de 4</span> — '+fL[n];
 }
 async function submitF(){
+  const q1=document.getElementById('q1').value;
   const areas=[...document.querySelectorAll('input[name="areas"]:checked')].map(i=>i.value).join(', ');
-  const via=document.querySelector('input[name="via"]:checked')?.value||'';
-  const data={
-    'Qué te trajo hasta acá':document.getElementById('q1').value,
-    'Áreas afectadas':areas,
-    'Por qué busca ayuda ahora':document.getElementById('q3').value,
-    'Preferencia de contacto':via,
-    'Nombre':document.getElementById('nombre').value,
-    'Contacto':document.getElementById('contacto-dato').value
-  };
+  const q3=document.getElementById('q3').value;
+  const via=document.querySelector('input[name="via"]:checked')?.value||'No especificado';
+  const nombre=document.getElementById('nombre').value;
+  const contactoDato=document.getElementById('contacto-dato').value;
+  if(!nombre||!contactoDato){
+    alert('Por favor completá tu nombre y dato de contacto antes de enviar.');
+    return;
+  }
+  const btn=document.querySelector('#s4 .fbtn-p:last-child');
+  btn.textContent='Enviando...';
+  btn.disabled=true;
   try{
     const res=await fetch('https://formspree.io/f/mwvazvqy',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify(data)
+      body:JSON.stringify({
+        'Qué te trajo hasta acá':q1,
+        'Áreas afectadas':areas,
+        'Por qué busca ayuda ahora':q3,
+        'Preferencia de contacto':via,
+        'Nombre':nombre,
+        'Contacto':contactoDato
+      })
     });
     if(res.ok){
       document.getElementById('s4').style.display='none';
@@ -563,10 +573,15 @@ async function submitF(){
       for(let i=1;i<=4;i++) document.getElementById('pb'+i).classList.add('on');
       document.getElementById('lbl').innerHTML='<span>Formulario enviado</span>';
     } else {
-      alert('Hubo un error al enviar. Por favor escribime directamente por WhatsApp.');
+      const err=await res.json();
+      alert('Error al enviar: '+JSON.stringify(err)+'. Escribime por WhatsApp.');
+      btn.textContent='Enviar y coordinar llamada →';
+      btn.disabled=false;
     }
   } catch(e){
-    alert('Hubo un error al enviar. Por favor escribime directamente por WhatsApp.');
+    alert('Error de conexión: '+e.message+'. Escribime por WhatsApp.');
+    btn.textContent='Enviar y coordinar llamada →';
+    btn.disabled=false;
   }
 }
 document.querySelectorAll('.opt').forEach(el=>{
