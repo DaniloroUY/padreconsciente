@@ -541,31 +541,23 @@ function goF(n){
   document.getElementById('lbl').innerHTML='<span>Paso '+n+' de 4</span> — '+fL[n];
 }
 async function submitF(){
-  const q1=document.getElementById('q1').value;
-  const areas=[...document.querySelectorAll('input[name="areas"]:checked')].map(i=>i.value).join(', ');
-  const q3=document.getElementById('q3').value;
-  const via=document.querySelector('input[name="via"]:checked')?.value||'No especificado';
-  const nombre=document.getElementById('fnombre').value;
-  const contactoDato=document.getElementById('fcontacto').value;
-  if(!nombre||!contactoDato){
-    alert('Por favor completá tu nombre y dato de contacto antes de enviar.');
-    return;
-  }
-  const btn=document.querySelector('#s4 .fbtn-p:last-child');
-  btn.textContent='Enviando...';
-  btn.disabled=true;
   try{
+    const campos={
+      'Qué te trajo hasta acá': document.querySelector('#q1')?.value||'',
+      'Áreas afectadas': [...document.querySelectorAll('input[name="areas"]:checked')].map(i=>i.value).join(', ')||'No especificado',
+      'Por qué busca ayuda ahora': document.querySelector('#q3')?.value||'',
+      'Preferencia de contacto': document.querySelector('input[name="via"]:checked')?.value||'No especificado',
+      'Nombre': document.querySelector('#fnombre')?.value||'',
+      'Contacto': document.querySelector('#fcontacto')?.value||''
+    };
+    if(!campos['Nombre']||!campos['Contacto']){
+      alert('Por favor completá tu nombre y dato de contacto.');
+      return;
+    }
     const res=await fetch('https://formspree.io/f/mwvazvqy',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({
-        'Qué te trajo hasta acá':q1,
-        'Áreas afectadas':areas,
-        'Por qué busca ayuda ahora':q3,
-        'Preferencia de contacto':via,
-        'Nombre':nombre,
-        'Contacto':contactoDato
-      })
+      body:JSON.stringify(campos)
     });
     if(res.ok){
       document.getElementById('s4').style.display='none';
@@ -573,15 +565,10 @@ async function submitF(){
       for(let i=1;i<=4;i++) document.getElementById('pb'+i).classList.add('on');
       document.getElementById('lbl').innerHTML='<span>Formulario enviado</span>';
     } else {
-      const err=await res.json();
-      alert('Error al enviar: '+JSON.stringify(err)+'. Escribime por WhatsApp.');
-      btn.textContent='Enviar y coordinar llamada →';
-      btn.disabled=false;
+      alert('Error al enviar. Escribime por WhatsApp: +598 98 793 630');
     }
   } catch(e){
-    alert('Error de conexión: '+e.message+'. Escribime por WhatsApp.');
-    btn.textContent='Enviar y coordinar llamada →';
-    btn.disabled=false;
+    alert('Error: '+e.message+'. Escribime por WhatsApp: +598 98 793 630');
   }
 }
 document.querySelectorAll('.opt').forEach(el=>{
