@@ -550,7 +550,7 @@ async function submitF(){
       'Nombre': window._nombre||'',
       'Contacto': window._contacto||''
     };
-    if(!campos['Nombre']||!campos['Contacto']){ campos['Nombre']=campos['Nombre']||'sin nombre'; campos['Contacto']=campos['Contacto']||'sin contacto'; }
+    if(!campos['Nombre']||!campos['Contacto']){ alert('Por favor completá tu nombre y dato de contacto.'); return; }
     const res=await fetch('https://formspree.io/f/mwvazvqy',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
