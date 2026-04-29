@@ -547,8 +547,8 @@ async function submitF(){
       'Áreas afectadas': [...document.querySelectorAll('input[name="areas"]:checked')].map(i=>i.value).join(', ')||'No especificado',
       'Por qué busca ayuda ahora': document.querySelector('#q3')?.value||'',
       'Preferencia de contacto': document.querySelector('input[name="via"]:checked')?.value||'No especificado',
-      'Nombre': document.querySelector('#fnombre')?.value||'',
-      'Contacto': document.querySelector('#fcontacto')?.value||''
+      'Nombre': window._nombre||'',
+      'Contacto': window._contacto||''
     };
     if(!campos['Nombre']||!campos['Contacto']){
       alert('Por favor completá tu nombre y dato de contacto.');
