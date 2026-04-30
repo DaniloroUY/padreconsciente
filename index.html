@@ -542,15 +542,28 @@ function goF(n){
 }
 async function submitF(){
   try{
+    const inpNombre=document.getElementById('fnombre');
+    const inpContacto=document.getElementById('fcontacto');
+    const inpQ1=document.getElementById('q1');
+    const inpQ3=document.getElementById('q3');
+    const nombre=inpNombre?inpNombre.value:'';
+    const contacto=inpContacto?inpContacto.value:'';
+    const q1=inpQ1?inpQ1.value:'';
+    const q3=inpQ3?inpQ3.value:'';
+    const areas=[...document.querySelectorAll('input[name="areas"]:checked')].map(i=>i.value).join(', ')||'No especificado';
+    const via=document.querySelector('input[name="via"]:checked')?.value||'No especificado';
+    if(!nombre.trim()||!contacto.trim()){
+      alert('Por favor completá tu nombre y dato de contacto.');
+      return;
+    }
     const campos={
-      'Qué te trajo hasta acá': document.querySelector('#q1')?.value||'',
-      'Áreas afectadas': [...document.querySelectorAll('input[name="areas"]:checked')].map(i=>i.value).join(', ')||'No especificado',
-      'Por qué busca ayuda ahora': document.querySelector('#q3')?.value||'',
-      'Preferencia de contacto': document.querySelector('input[name="via"]:checked')?.value||'No especificado',
-      'Nombre': window._nombre||'',
-      'Contacto': window._contacto||''
+      'Qué te trajo hasta acá': q1,
+      'Áreas afectadas': areas,
+      'Por qué busca ayuda ahora': q3,
+      'Preferencia de contacto': via,
+      'Nombre': nombre,
+      'Contacto': contacto
     };
-    if(!campos['Nombre']||!campos['Contacto']){ campos['Nombre']=campos['Nombre']||'No indicó'; campos['Contacto']=campos['Contacto']||'No indicó'; }
     const res=await fetch('https://formspree.io/f/mwvazvqy',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
