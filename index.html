@@ -540,47 +540,26 @@ function goF(n){
   }
   document.getElementById('lbl').innerHTML='<span>Paso '+n+' de 4</span> — '+fL[n];
 }
-async function submitF(){
+document.getElementById('intakeForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const formData=new FormData(this);
   try{
-    const inpNombre=document.getElementById('fnombre');
-    const inpContacto=document.getElementById('fcontacto');
-    const inpQ1=document.getElementById('q1');
-    const inpQ3=document.getElementById('q3');
-    const nombre=inpNombre?inpNombre.value:'';
-    const contacto=inpContacto?inpContacto.value:'';
-    const q1=inpQ1?inpQ1.value:'';
-    const q3=inpQ3?inpQ3.value:'';
-    const areas=[...document.querySelectorAll('input[name="areas"]:checked')].map(i=>i.value).join(', ')||'No especificado';
-    const via=document.querySelector('input[name="via"]:checked')?.value||'No especificado';
-    if(!nombre.trim()||!contacto.trim()){
-      alert('Por favor completá tu nombre y dato de contacto.');
-      return;
-    }
-    const campos={
-      'Qué te trajo hasta acá': q1,
-      'Áreas afectadas': areas,
-      'Por qué busca ayuda ahora': q3,
-      'Preferencia de contacto': via,
-      'Nombre': nombre,
-      'Contacto': contacto
-    };
-    const res=await fetch('https://formspree.io/f/mwvazvqy',{
+    const res=await fetch(this.action,{
       method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify(campos)
+      body:formData,
+      headers:{'Accept':'application/json'}
     });
     if(res.ok){
-      document.getElementById('s4').style.display='none';
+      this.style.display='none';
       document.getElementById('suc').style.display='block';
-      for(let i=1;i<=4;i++) document.getElementById('pb'+i).classList.add('on');
       document.getElementById('lbl').innerHTML='<span>Formulario enviado</span>';
     } else {
       alert('Error al enviar. Escribime por WhatsApp: +598 98 793 630');
     }
-  } catch(e){
-    alert('Error: '+e.message+'. Escribime por WhatsApp: +598 98 793 630');
+  } catch(err){
+    alert('Error: '+err.message+'. Escribime por WhatsApp: +598 98 793 630');
   }
-}
+});
 document.querySelectorAll('.opt').forEach(el=>{
   el.addEventListener('click',function(){
     const inp=this.querySelector('input');
