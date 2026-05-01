@@ -456,59 +456,61 @@ footer{background:#1E1E1C;padding:40px 5vw}
         </div>
       </div>
       <div class="form-wrap">
-        <div class="progress-bar">
-          <div class="pb on" id="pb1"></div>
-          <div class="pb" id="pb2"></div>
-          <div class="pb" id="pb3"></div>
-          <div class="pb" id="pb4"></div>
-        </div>
-        <div class="step-lbl" id="lbl"><span>Paso 1 de 4</span> — Lo que estás viviendo</div>
-        <div id="s1">
-          <div class="q-block">
-            <div class="q-label">¿Qué te trajo hasta acá?</div>
-            <div class="q-sub">No hace falta que sea perfecto — contame en tus palabras qué está pasando.</div>
-            <textarea id="q1" rows="4" placeholder="Escribí lo que se te venga..."></textarea>
+        <form action="https://formspree.io/f/mwvazvqy" method="POST" id="intakeForm">
+          <div class="progress-bar">
+            <div class="pb on" id="pb1"></div>
+            <div class="pb" id="pb2"></div>
+            <div class="pb" id="pb3"></div>
+            <div class="pb" id="pb4"></div>
           </div>
-          <div class="btn-row"><button class="fbtn-p" onclick="goF(2)">Siguiente →</button></div>
-        </div>
-        <div id="s2" style="display:none">
-          <div class="q-block">
-            <div class="q-label">¿Qué áreas de tu vida están siendo afectadas?</div>
-            <div class="q-sub">Podés elegir más de una.</div>
-            <div class="opts">
-              <label class="opt"><input type="checkbox"> Tu relación de pareja</label>
-              <label class="opt"><input type="checkbox"> El vínculo con tus hijos o tu rol como padre</label>
-              <label class="opt"><input type="checkbox"> Tu trabajo o vida profesional</label>
-              <label class="opt"><input type="checkbox"> Tu identidad, bienestar o sentido de propósito</label>
-              <label class="opt"><input type="checkbox"> Varias a la vez — es difícil separarlo</label>
+          <div class="step-lbl" id="lbl"><span>Paso 1 de 4</span> — Lo que estás viviendo</div>
+          <div id="s1">
+            <div class="q-block">
+              <div class="q-label">¿Qué te trajo hasta acá?</div>
+              <div class="q-sub">No hace falta que sea perfecto — contame en tus palabras qué está pasando.</div>
+              <textarea name="que_te_trajo" rows="4" placeholder="Escribí lo que se te venga..."></textarea>
             </div>
+            <div class="btn-row"><button type="button" class="fbtn-p" onclick="goF(2)">Siguiente →</button></div>
           </div>
-          <div class="btn-row"><button class="fbtn-b" onclick="goF(1)">← Volver</button><button class="fbtn-p" onclick="goF(3)">Siguiente →</button></div>
-        </div>
-        <div id="s3" style="display:none">
-          <div class="q-block">
-            <div class="q-label">¿Qué te hace buscar ayuda ahora?</div>
-            <div class="q-sub">¿Hubo algo concreto que te hizo dar este paso hoy? Puede ser un evento, una sensación, una conversación, un límite al que llegaste.</div>
-            <textarea id="q3" rows="4" placeholder="Contame lo que se te venga..."></textarea>
-          </div>
-          <div class="btn-row"><button class="fbtn-b" onclick="goF(2)">← Volver</button><button class="fbtn-p" onclick="goF(4)">Siguiente →</button></div>
-        </div>
-        <div id="s4" style="display:none">
-          <div class="q-block">
-            <div class="q-label">¿Cómo preferís que te contacte?</div>
-            <div class="q-sub">Dejame tus datos y me pongo en contacto en menos de 24 horas.</div>
-            <div class="opts" style="flex-direction:row;margin-bottom:14px">
-              <label class="opt" style="flex:1"><input type="radio" name="via"> WhatsApp</label>
-              <label class="opt" style="flex:1"><input type="radio" name="via"> Email</label>
+          <div id="s2" style="display:none">
+            <div class="q-block">
+              <div class="q-label">¿Qué áreas de tu vida están siendo afectadas?</div>
+              <div class="q-sub">Podés elegir más de una.</div>
+              <div class="opts">
+                <label class="opt"><input type="checkbox" name="areas" value="Pareja"> Tu relación de pareja</label>
+                <label class="opt"><input type="checkbox" name="areas" value="Hijos / rol como padre"> El vínculo con tus hijos o tu rol como padre</label>
+                <label class="opt"><input type="checkbox" name="areas" value="Trabajo"> Tu trabajo o vida profesional</label>
+                <label class="opt"><input type="checkbox" name="areas" value="Identidad / propósito"> Tu identidad, bienestar o sentido de propósito</label>
+                <label class="opt"><input type="checkbox" name="areas" value="Varias"> Varias a la vez — es difícil separarlo</label>
+              </div>
             </div>
-            <div class="row2">
-              <div><div class="fl">Tu nombre</div><input type="text" placeholder="¿Cómo te llaman?"></div>
-              <div><div class="fl">WhatsApp o email</div><input type="text" placeholder="+598 / tu@email.com"></div>
-            </div>
+            <div class="btn-row"><button type="button" class="fbtn-b" onclick="goF(1)">← Volver</button><button type="button" class="fbtn-p" onclick="goF(3)">Siguiente →</button></div>
           </div>
-          <div class="disclaimer"><p>🔒 Todo lo que compartís acá es estrictamente confidencial. Tu información se utilizará únicamente para coordinar el contacto inicial y no será compartida con ningún tercero.</p></div>
-          <div class="btn-row"><button class="fbtn-b" onclick="goF(3)">← Volver</button><button class="fbtn-p" onclick="submitF()">Enviar y coordinar llamada →</button></div>
-        </div>
+          <div id="s3" style="display:none">
+            <div class="q-block">
+              <div class="q-label">¿Qué te hace buscar ayuda ahora?</div>
+              <div class="q-sub">¿Hubo algo concreto que te hizo dar este paso hoy? Puede ser un evento, una sensación, una conversación, un límite al que llegaste.</div>
+              <textarea name="por_que_ahora" rows="4" placeholder="Contame lo que se te venga..."></textarea>
+            </div>
+            <div class="btn-row"><button type="button" class="fbtn-b" onclick="goF(2)">← Volver</button><button type="button" class="fbtn-p" onclick="goF(4)">Siguiente →</button></div>
+          </div>
+          <div id="s4" style="display:none">
+            <div class="q-block">
+              <div class="q-label">¿Cómo preferís que te contacte?</div>
+              <div class="q-sub">Dejame tus datos y me pongo en contacto en menos de 24 horas.</div>
+              <div class="opts" style="flex-direction:row;margin-bottom:14px">
+                <label class="opt" style="flex:1"><input type="radio" name="via" value="WhatsApp"> WhatsApp</label>
+                <label class="opt" style="flex:1"><input type="radio" name="via" value="Email"> Email</label>
+              </div>
+              <div class="row2">
+                <div><div class="fl">Tu nombre</div><input type="text" name="nombre" required placeholder="¿Cómo te llaman?"></div>
+                <div><div class="fl">WhatsApp o email</div><input type="text" name="contacto" required placeholder="+598 / tu@email.com"></div>
+              </div>
+            </div>
+            <div class="disclaimer"><p>🔒 Todo lo que compartís acá es estrictamente confidencial. Tu información se utilizará únicamente para coordinar el contacto inicial y no será compartida con ningún tercero.</p></div>
+            <div class="btn-row"><button type="button" class="fbtn-b" onclick="goF(3)">← Volver</button><button type="submit" class="fbtn-p">Enviar y coordinar llamada →</button></div>
+          </div>
+        </form>
         <div id="suc" style="display:none" class="suc">
           <div class="suc-ic">✓</div>
           <div style="font-size:18px;font-weight:700;margin-bottom:10px">Listo, recibí tu mensaje.</div>
@@ -540,31 +542,32 @@ function goF(n){
   }
   document.getElementById('lbl').innerHTML='<span>Paso '+n+' de 4</span> — '+fL[n];
 }
-document.getElementById('intakeForm').addEventListener('submit',async function(e){
-  e.preventDefault();
-  const formData=new FormData(this);
-  try{
-    const res=await fetch(this.action,{
-      method:'POST',
-      body:formData,
-      headers:{'Accept':'application/json'}
+window.addEventListener('DOMContentLoaded',function(){
+  const form=document.getElementById('intakeForm');
+  if(form){
+    form.addEventListener('submit',async function(e){
+      e.preventDefault();
+      const formData=new FormData(form);
+      try{
+        const res=await fetch(form.action,{method:'POST',body:formData,headers:{'Accept':'application/json'}});
+        if(res.ok){
+          form.style.display='none';
+          document.getElementById('suc').style.display='block';
+          document.getElementById('lbl').innerHTML='<span>Formulario enviado</span>';
+        } else {
+          alert('Error al enviar. Escribime por WhatsApp: +598 98 793 630');
+        }
+      } catch(err){
+        alert('Error: '+err.message+'. Escribime por WhatsApp: +598 98 793 630');
+      }
     });
-    if(res.ok){
-      this.style.display='none';
-      document.getElementById('suc').style.display='block';
-      document.getElementById('lbl').innerHTML='<span>Formulario enviado</span>';
-    } else {
-      alert('Error al enviar. Escribime por WhatsApp: +598 98 793 630');
-    }
-  } catch(err){
-    alert('Error: '+err.message+'. Escribime por WhatsApp: +598 98 793 630');
   }
-});
-document.querySelectorAll('.opt').forEach(el=>{
-  el.addEventListener('click',function(){
-    const inp=this.querySelector('input');
-    if(inp.type==='checkbox'){setTimeout(()=>this.classList.toggle('sel',inp.checked),0);}
-    else{document.querySelectorAll('input[name="'+inp.name+'"]').forEach(r=>r.closest('.opt').classList.remove('sel'));setTimeout(()=>this.classList.add('sel'),0);}
+  document.querySelectorAll('.opt').forEach(el=>{
+    el.addEventListener('click',function(){
+      const inp=this.querySelector('input');
+      if(inp.type==='checkbox'){setTimeout(()=>this.classList.toggle('sel',inp.checked),0);}
+      else{document.querySelectorAll('input[name="'+inp.name+'"]').forEach(r=>r.closest('.opt').classList.remove('sel'));setTimeout(()=>this.classList.add('sel'),0);}
+    });
   });
 });
 </script>
