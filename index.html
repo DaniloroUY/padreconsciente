@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --verde:#3B6D11;--verde-claro:#EAF3DE;--verde-mid:#C0DD97;--verde-dark:#27500A;
+  --verde:#63664B;--verde-claro:#EAF3DE;--verde-mid:#C0DD97;--verde-dark:#27500A;
   --tierra:#B4956A;--tierra-claro:#F5EFE6;--tierra-dark:#7A5C38;
   --texto:#1E1E1C;--texto-s:#5F5E5A;--texto-xs:#888780;
   --bg:#FAFAF7;--bg2:#F3EFE8;--bg3:#FFFFFF;
@@ -16,9 +16,11 @@
 html{scroll-behavior:smooth}
 body{font-family:system-ui,-apple-system,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--texto);line-height:1.6}
 nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--borde);padding:0 5vw}
-.nav-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:60px}
-.nav-brand{font-size:15px;font-weight:600;color:var(--texto);letter-spacing:-.3px}
-.nav-brand span{color:var(--verde)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:64px}
+.nav-brand{display:flex;align-items:center;gap:12px}
+.nav-name{font-size:15px;font-weight:600;letter-spacing:-.3px}
+.nav-sep{color:var(--borde);font-weight:300;font-size:18px}
+.nav-mono{height:36px;width:auto;display:block}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{font-size:13px;color:var(--texto-s);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--verde)}
@@ -175,7 +177,11 @@ footer{background:#1E1E1C;padding:40px 5vw}
 
 <nav>
   <div class="nav-inner">
-    <div class="nav-brand">Padre<span>Consciente</span></div>
+    <div class="nav-brand">
+      <span class="nav-name"><span style="color:#353535">Padre</span><span style="color:#63664B">Consciente</span></span>
+      <span class="nav-sep">|</span>
+      <img src="monograma.png" alt="Danilo Rodríguez" class="nav-mono">
+    </div>
     <div class="nav-links">
       <a href="#proceso">El proceso</a>
       <a href="#empresas">Empresas</a>
